@@ -47,7 +47,9 @@ const routes = [
   {
     path: '/add',
     name: 'Add',
-    component: AddEvent
+    component: AddEvent,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers'] } 
+
   },
   {
     path: '/list',
@@ -57,7 +59,9 @@ const routes = [
   {
     path: '/edit',
     name: 'Edit',
-    component: EditForm
+    component: EditForm,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers'] } 
+
   },
   {
     path: '/adminview',
@@ -77,22 +81,30 @@ const routes = [
   {
     path: '/summary',
     name: 'summary',
-    component: EventSummary
+    component: EventSummary,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin'] } 
+
   },
   {
     path: '/analysis',
     name: 'analysis',
-    component: EventAnalysis
+    component: EventAnalysis,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin'] } 
+
   },
   {
     path: '/roles',
     name: 'roles',
-    component: UpdateRoles
+    component: UpdateRoles,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin'] } 
+
   },
   {
     path: '/usereventaccess',
     name: 'UserEvent',
-    component: UserEventAccess
+    component: UserEventAccess,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers'] } 
+
   },
   {
     path: '/customergetticketsall',
@@ -108,25 +120,25 @@ const routes = [
     path: '/admindashboard',
     name: 'admindashboard',
     component: AdminDashboard,
-    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin'] } 
+   // meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin'] } 
   },
   {
     path: '/organizersdashboard',
     name: 'organizersdashboard',
     component: OrganizerDashboard,
-    meta: { requiresAuth: true, roles: ['Event Organizers'] } // Added roles
+   // meta: { requiresAuth: true, roles: ['Event Organizers'] } 
   },
   {
     path: '/validatordashboard',
     name: 'validatordashboard',
     component: ValidatorDashboard,
-    meta: { requiresAuth: true, roles: ['Validator'] } // Added roles
+   // meta: { requiresAuth: true, roles: ['Validator'] } 
   },
   {
     path: '/customerdashboard',
     name: 'customerdashboard',
     component: CustomerDashboard,
-    meta: { requiresAuth: true, roles: ['Customer'] } // Added roles
+   // meta: { requiresAuth: true, roles: ['Customer'] } 
   }
 ];
 

@@ -5,16 +5,16 @@ import { useLocalStorage } from '@vueuse/core';
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     token: useLocalStorage('token', ''),
-    user: useLocalStorage('user', null),
+    user: useLocalStorage('user', '{}'), // Initialize as an empty JSON string
   }),
   actions: {
     setToken(token, user) {
       this.token = token;
-      this.user = user;
+      this.user = JSON.stringify(user); // Store user data as JSON string
       console.log('User set in store:', user);
       try {
         localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user)); // Ensure user is stringified
+        localStorage.setItem('user', this.user); // Save stringified user
       } catch (error) {
         console.error('Error setting items in localStorage:', error);
       }
@@ -24,22 +24,40 @@ export const useAuthStore = defineStore('auth', {
     },
     getUser() {
       try {
-        return JSON.parse(localStorage.getItem('user')); // Ensure user is parsed correctly
+        const user = localStorage.getItem('user');
+        return user ? JSON.parse(user) : {}; // Parse user JSON data safely
       } catch (error) {
         console.error('Error parsing user from localStorage:', error);
-        return null;
+        return {};
       }
     },
     logout() {
       this.token = '';
-      this.user = null;
+      this.user = '{}'; // Reset user to an empty JSON string
       localStorage.removeItem('token');
       localStorage.removeItem('user');
     }
   },
   getters: {
     isAuthenticated: (state) => !!state.token,
-    userName: (state) => state.user?.first_name || '',
+    userName: (state) => {
+      try {
+        const user = JSON.parse(state.user);
+        return user.first_name || '';
+      } catch (error) {
+        console.error('Error parsing user data in getter:', error);
+        return '';
+      }
+    },
+    userRole: (state) => {
+      try {
+        const user = JSON.parse(state.user);
+        return user.role || '';
+      } catch (error) {
+        console.error('Error parsing user role in getter:', error);
+        return '';
+      }
+    },
   },
   persist: {
     enabled: true,

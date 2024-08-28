@@ -7,6 +7,9 @@
         <router-link to="/">
           <button class="text-white text-lg font-semibold hover:underline">Go To Home</button>
         </router-link>
+        <button v-if="isAuthenticated" @click="goToDashboard" class="text-white text-lg font-semibold hover:underline">
+          Go To Dashboard
+        </button>
       </div>
 
       <!-- Legacy Events in the middle -->
@@ -34,29 +37,51 @@
 </template>
 
 <script>
-import { useAuthStore } from '../stores/auth';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '../stores/auth';
 
 export default {
   name: 'Header',
   setup() {
     const authStore = useAuthStore();
+    const router = useRouter();
 
     const isAuthenticated = computed(() => authStore.isAuthenticated);
-    const userName = computed(() => {
-      const name = authStore.userName;
-      console.log('UserName from store:', name); // Log userName
-      return name;
-    });
+    const userName = computed(() => authStore.userName);
 
     const logout = () => {
       authStore.logout();
+    };
+
+    const goToDashboard = () => {
+      const role = authStore.userRole;
+      
+      switch (role) {
+        case 'Super Admin':
+        case 'System Admin':
+          router.push({ name: 'admindashboard' });
+          break;
+        case 'Event Organizers':
+          router.push({ name: 'organizersdashboard' });
+          break;
+        case 'Validator':
+          router.push({ name: 'validatordashboard' });
+          break;
+        case 'Customer':
+          router.push({ name: 'customerdashboard' });
+          break;
+        default:
+          router.push({ name: 'Home' }); // Fallback route
+          break;
+      }
     };
 
     return {
       isAuthenticated,
       userName,
       logout,
+      goToDashboard,
     };
   },
 };
