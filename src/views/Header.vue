@@ -1,15 +1,23 @@
 <template>
-  <header class="bg-gray-900 text-white p-4 shadow-md">
-    <div class="container mx-auto flex items-center justify-between">
-      <!-- Logo on the left -->
-      <div class="flex items-center space-x-4">
+  <header class="bg-gradient-to-r from-purple-600 to-pink-500 text-white p-4 shadow-md">
+    <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between">
+      <!-- Home Button and Logo on the left -->
+      <div class="flex items-center space-x-4 mb-4 sm:mb-0">
         <img src="../assets/logo.jpg" alt="Logo" class="h-12 w-auto" />
-        <h1 class="text-xl font-bold font-serif">Legacy Events</h1>
+        <router-link to="/">
+          <button class="text-white text-lg font-semibold hover:underline">Go To Home</button>
+        </router-link>
       </div>
+
+      <!-- Legacy Events in the middle -->
+      <div class="flex-1 text-center mb-4 sm:mb-0">
+        <h1 class="text-2xl font-bold font-serif">Legacy Events</h1>
+      </div>
+
       <!-- Navigation and user info on the right -->
       <div class="flex items-center space-x-4">
         <div v-if="isAuthenticated" class="flex items-center space-x-4">
-          <span class="text-lg">Welcome, {{ userName }}!</span>
+          <span class="text-sm font-bold text-black">Welcome, {{ userName }}!</span>
           <button @click="logout" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Logout</button>
         </div>
         <div v-else class="flex space-x-4">
