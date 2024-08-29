@@ -28,7 +28,7 @@
 
           <div v-for="(category, index) in event.ticket_categories" :key="index" class="mb-4">
             <h3 class="text-xl font-semibold text-gray-800">{{ category.category_name }}</h3>
-            <p class="text-lg font-medium text-gray-700"><strong>Price:</strong> ${{ category.price }}</p>
+            <p class="text-lg font-medium text-gray-700"><strong>Price:</strong> Ksh. {{ category.price }}</p>
 
             <div class="flex items-center mt-2">
               <button @click="decreaseQuantity(index)" class="bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">-</button>

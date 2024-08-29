@@ -42,7 +42,7 @@
   
         <div class="bg-gray-100 p-4 rounded-lg shadow-md">
           <h3 class="text-xl font-semibold mb-2">Ticket Categories</h3>
-          <div v-for="(category, index) in ticketCategories" :key="index" class="space-y-4 mb-4">
+          <div v-for="(category, index) in ticket_categories" :key="index" class="space-y-4 mb-4">
             <div class="form-group">
               <label :for="'category_name_' + index" class="block text-gray-700 font-medium mb-2">Category Name</label>
               <input v-model="category.category_name" :id="'category_name_' + index" type="text" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required />
@@ -81,7 +81,7 @@ export default {
         total_tickets: 0,
         image_url: ''
       },
-      ticketCategories: [
+      ticket_categories: [
         {
           category_name: '',
           price: 0.00,
@@ -95,61 +95,63 @@ export default {
     return { authStore };
   },
   methods: {
-    addTicketCategory() {
-      this.ticketCategories.push({
+  addTicketCategory() {
+    this.ticket_categories.push({
+      category_name: '',
+      price: 0.00,
+      quantity_available: 0
+    });
+  },
+  async addEvent() {
+    try {
+      const token = this.authStore.getToken();
+      // Adjust the data structure to match the server expectation
+      const response = await axios.post('/api/event/add', {
+        event: this.event,
+        ticket_categories: this.ticket_categories
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log('Server response:', response); // Log the server response here
+      if (response && response.data) {
+        console.log('Event added successfully');
+        this.resetForm();
+      } else {
+        console.error('Unexpected response format', response);
+        alert('Unexpected response format');
+      }
+    } catch (error) {
+      if (error.response && error.response.data) {
+        console.error('Error adding event:', error.response.data);
+        alert(`Error adding event: ${error.response.data.message}`);
+      } else {
+        console.error('Error adding event:', error);
+        alert('Error adding event');
+      }
+    }
+  },
+  resetForm() {
+    this.event = {
+      name: '',
+      date: '',
+      start_time: '',
+      end_time: '',
+      venue: '',
+      description: '',
+      total_tickets: 0,
+      image_url: ''
+    };
+    this.ticket_categories = [
+      {
         category_name: '',
         price: 0.00,
         quantity_available: 0
-      });
-    },
-    async addEvent() {
-      try {
-        const token = this.authStore.getToken();
-        const response = await axios.post('/api/event/add', {
-          ...this.event,
-          ticketCategories: this.ticketCategories
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`, // Use the token here
-            'Content-Type': 'application/json'
-          }
-        });
-        if (response && response.data) {
-          alert('Event added successfully');
-          this.resetForm();
-        } else {
-          console.error('Unexpected response format', response);
-          alert('Unexpected response format');
-        }
-      } catch (error) {
-        if (error.response && error.response.data) {
-          console.error('Error adding event:', error.response.data);
-          alert(`Error adding event: ${error.response.data.message}`);
-        } else {
-          console.error('Error adding event:', error);
-          alert('Error adding event');
-        }
       }
-    },
-    resetForm() {
-      this.event = {
-        name: '',
-        date: '',
-        start_time: '',
-        end_time: '',
-        venue: '',
-        description: '',
-        total_tickets: 0,
-        image_url: ''
-      };
-      this.ticketCategories = [
-        {
-          category_name: '',
-          price: 0.00,
-          quantity_available: 0
-        }
-      ];
-    }
+    ];
   }
-};
+}
+}
 </script>

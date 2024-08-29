@@ -5,8 +5,10 @@
       <p class="text-gray-600">{{ event.date }}</p>
    
       <p class="text-gray-800 mt-2">{{ event.venue }}</p>
-   
-      <button @click="bookNow" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg">Book Now</button>
+       
+        <button @click="bookNow" class="mt-4 px-4 py-2 bg-yellow-600 items-center text-white rounded-lg">Book Now</button>
+
+       
     </div>
   </template>
   

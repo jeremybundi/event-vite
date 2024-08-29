@@ -21,6 +21,7 @@ import UserEventAccess from '../views/UserEventAccess.vue';
 import CustomerGetTickets from '../views/CustomerGetTickets.vue';
 import CustomerPaidTicket from '../views/CustomerPaidTicket.vue';
 import EventAnalysis from '../views/EventAnalysis.vue';
+import RedeemTicket from '../views/RedeemTicket.vue';
 
 const routes = [
   {
@@ -42,7 +43,9 @@ const routes = [
     path: '/event/:id',
     name: 'EventDetails',
     component: EventDetails,
-    props: true
+    props: true,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator', 'Customer'] } 
+
   },
   {
     path: '/add',
@@ -54,7 +57,9 @@ const routes = [
   {
     path: '/list',
     name: 'List',
-    component: EventList
+    component: EventList,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers'] } 
+
   },
   {
     path: '/edit',
@@ -66,12 +71,23 @@ const routes = [
   {
     path: '/adminview',
     name: 'adminview',
-    component: AdminView
+    component: AdminView,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers'] } 
+
   },
   {
     path: '/adminvalidate',
     name: 'adminvalidate',
-    component: AdminValidate
+    component: AdminValidate,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator'] } 
+
+  },
+  {
+    path: '/redeem',
+    name: 'redeem',
+    component: RedeemTicket,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator'] } 
+
   },
   {
     path: '/forgot',
@@ -109,18 +125,22 @@ const routes = [
   {
     path: '/customergetticketsall',
     name: 'GetAll',
-    component: CustomerGetTickets
+    component: CustomerGetTickets,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator', 'Customer'] } 
+
   },
   {
     path: '/customerpaidtickets',
     name: 'GetPaid',
-    component: CustomerPaidTicket
+    component: CustomerPaidTicket,
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator', 'Customer'] } 
+
   },
   {
     path: '/admindashboard',
     name: 'admindashboard',
     component: AdminDashboard,
-   // meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin'] } 
+   meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin'] } 
   },
   {
     path: '/organizersdashboard',
@@ -138,7 +158,7 @@ const routes = [
     path: '/customerdashboard',
     name: 'customerdashboard',
     component: CustomerDashboard,
-   // meta: { requiresAuth: true, roles: ['Customer'] } 
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator', 'Customer'] } 
   }
 ];
 
@@ -166,7 +186,7 @@ router.beforeEach((to, from, next) => {
 
       if (allowedRoles && !allowedRoles.includes(role)) {
         // User role is not allowed to access this route
-        return next({ name: 'Login' }); // or redirect to an error page or homepage
+        return next({  }); 
       }
     }
   }

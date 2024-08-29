@@ -171,7 +171,7 @@
       };
   
       const cancel = () => {
-        router.push('/list'); // Redirect to the /list page
+        router.push('/list'); 
       };
   
       return {

@@ -15,6 +15,17 @@
             </svg>
             Validate Tickets
           </button>
+          
+        </div>
+           <!-- Redeem Tickets Button -->
+        <div class="p-6 flex justify-center">
+        
+        <button @click="navigateTo('redeem')" class="dashboard-button bg-pink-500 hover:bg-pink-600">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7V4a1 1 0 00-1-1H9a1 1 0 00-1 1v3H5a1 1 0 00-1 1v3h16V8a1 1 0 00-1-1h-3zM4 12v4a1 1 0 001 1h2m10 0h2a1 1 0 001-1v-4M8 21h8M12 16v5" />
+          </svg>
+          Redeem Tickets
+        </button>
         </div>
   
         <!-- Footer -->

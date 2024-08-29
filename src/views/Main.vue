@@ -1,7 +1,13 @@
 <template>
+    <div class="space-y-6"> <!-- Container for vertical spacing between components -->
+    <!-- Slideshow component at the top -->
+    <!-- <div class="mt-2">
+    <Slideshow />
+  </div> -->
     <div class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- EventCard component for each event -->
       <EventCard v-for="event in events" :key="event.id" :event="event" />
+    </div>
     </div>
   </template>
   
@@ -12,6 +18,8 @@
   
   // Define EventCard as a local component
   import EventCard from './EventCard.vue';
+ // import Slideshow from './SlideShow.vue'; // Make sure the path is correct
+
   
   const events = ref([]);
   const router = useRouter();
