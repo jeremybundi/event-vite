@@ -22,6 +22,7 @@ import CustomerGetTickets from '../views/CustomerGetTickets.vue';
 import CustomerPaidTicket from '../views/CustomerPaidTicket.vue';
 import EventAnalysis from '../views/EventAnalysis.vue';
 import RedeemTicket from '../views/RedeemTicket.vue';
+import CustomerLogin from '../views/CustomerLogin.vue';
 
 const routes = [
   {
@@ -40,13 +41,19 @@ const routes = [
     component: Login
   },
   {
+  path: '/customerlogin',
+  name: 'CustomerLogin',
+  component: CustomerLogin
+  },
+  {
     path: '/event/:id',
     name: 'EventDetails',
     component: EventDetails,
     props: true,
-    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator', 'Customer'] } 
+    //meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator', 'Customer'] } 
 
   },
+
   {
     path: '/add',
     name: 'Add',
@@ -98,7 +105,7 @@ const routes = [
     path: '/summary',
     name: 'summary',
     component: EventSummary,
-    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin'] } 
+    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers'] } 
 
   },
   {
@@ -126,14 +133,14 @@ const routes = [
     path: '/customergetticketsall',
     name: 'GetAll',
     component: CustomerGetTickets,
-    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator', 'Customer'] } 
+   // meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator', 'Customer'] } 
 
   },
   {
     path: '/customerpaidtickets',
     name: 'GetPaid',
     component: CustomerPaidTicket,
-    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator', 'Customer'] } 
+   // meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator', 'Customer'] } 
 
   },
   {
@@ -158,7 +165,7 @@ const routes = [
     path: '/customerdashboard',
     name: 'customerdashboard',
     component: CustomerDashboard,
-    meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator', 'Customer'] } 
+    //meta: { requiresAuth: true, roles: ['System Admin', 'Super Admin', 'Event Organizers', 'Validator', 'Customer'] } 
   }
 ];
 

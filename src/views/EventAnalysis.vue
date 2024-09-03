@@ -59,7 +59,7 @@
       <div v-for="(event, eventId) in filteredEvents" :key="eventId" class="mb-8 p-6 bg-gradient-to-r from-gray-50 to-white rounded-lg shadow-lg border-l-4 border-green-400">
         <h3 class="text-3xl font-semibold text-green-800 mb-4">{{ event.event_name }}</h3>
         <p class="text-gray-800 mb-2">Total Tickets Sold: <span class="font-bold">{{ event.total_tickets_sold }}</span></p>
-        <p class="text-gray-800 mb-4">Total Revenue: <span class="font-bold">${{ event.total_revenue.toFixed(2) }}</span></p>
+        <p class="text-gray-800 mb-4">Total Revenue: <span class="font-bold">Ksh. {{ event.total_revenue.toFixed(2) }}</span></p>
 
         <div class="mb-4">
           <h4 class="text-lg font-semibold text-green-800">Tickets Sold by Category:</h4>
@@ -80,7 +80,7 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import BarChart from './BarChart.vue';
-import { useAuthStore } from '../stores/auth'; // Import the auth store
+import { useAuthStore } from '../stores/auth'; 
 
 export default {
   components: { BarChart },

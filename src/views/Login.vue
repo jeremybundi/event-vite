@@ -68,10 +68,10 @@ export default {
       try {
         await axios.post('/api/login', loginDetails.value);
         otpSent.value = true;
-        alert('OTP has been sent to your phone and email');
+        console.log('OTP has been sent to your phone and email');
       } catch (error) {
         console.error('Error logging in:', error);
-        alert('Login failed. Please check your credentials.');
+        console.log('Login failed. Please check your credentials.');
       }
     };
 
