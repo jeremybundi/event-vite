@@ -1,6 +1,6 @@
 <template>
-    <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="bg-blue-600 p-4">
+    <div class="max-w-lg mx-auto mt-8 mb-8 bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="bg-gradient-to-r  from-indigo-800 to-lime-800 p-4">
         <h2 class="text-3xl font-bold text-white">Update User Role</h2>
         <p class="text-blue-200">Manage user roles easily and efficiently.</p>
       </div>
@@ -35,14 +35,13 @@
               <option value="3">System Admin</option>
               <option value="2">Event Organizer</option>
               <option value="4">Validator</option>
-              <option value="1">Customer</option>
             </select>
           </div>
   
           <div class="flex justify-end">
             <button 
               type="submit" 
-              class="px-6 py-2 bg-blue-600 text-white rounded-md shadow-sm transition-colors hover:bg-blue-700"
+              class="px-6 py-2 bg-lime-800 text-white rounded-md shadow-sm transition-colors hover:bg-indigo-700"
             >
               Update Role
             </button>

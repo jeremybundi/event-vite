@@ -11,20 +11,17 @@
         <!-- Ticket details -->
         <h2 class="text-2xl font-bold mb-4 text-center text-gray-700 font-sans">Ticket Details</h2>
         <div v-if="ticket" class="text-center space-y-2">
-          <p class="text-gray-800 font-semibold text-lg"><strong class="text-gray-700">Event Name:</strong> {{ ticket.event_name }}</p>
-          <p class="text-gray-700 font-medium text-base"><strong>Category:</strong> {{ ticket.category_name }}</p>
+          <p class="text-purple-600 font-semibold text-lg"> {{ ticket.event_name }}</p>
+          <p class="text-rose-900 font-medium text-base"><strong>Category:</strong> {{ ticket.category_name }}</p>
+          <p class="text-gray-700 font-medium text-base"><strong>Ticket Number:</strong> {{ ticket.ticket_id }}</p>
+
           <p class="text-gray-700 text-base">
-            <strong class="font-medium">Status:</strong>
+            <strong class="font-medium">Ticket Status:</strong>
             <span :class="{'text-green-500 font-bold': ticket.valid_status === '1', 'text-red-500 font-bold': ticket.valid_status === '0'}">
               {{ ticket.valid_status === '1' ? 'Valid' : 'Invalid' }}
             </span>
           </p>
-          <p class="text-gray-700 text-base">
-            <strong class="font-medium">Redeemed:</strong>
-            <span :class="{'text-green-500 font-bold': ticket.redeemed_ticket === '1', 'text-red-500 font-bold': ticket.redeemed_ticket === '0'}">
-              {{ ticket.redeemed_ticket === '1' ? 'Yes' : 'No' }}
-            </span>
-          </p>
+        
           <div v-if="ticket.qr_code" class="text-center mt-4">
             <img :src="ticket.qr_code" ref="qrCodeImage" alt="QR Code" class="mx-auto rounded-lg shadow-lg w-24 h-24" />
             <p class="text-sm text-gray-500 mt-2">Visit: <a href="http://www.legacyevents.com" target="_blank" class="underline text-blue-500">www.legacyevents.com</a></p>

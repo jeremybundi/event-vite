@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4 text-center">Paid Tickets</h1>
+    <h1 class="text-2xl font-bold mb-4 text-center">All Tickets</h1>
 
     <!-- Search Fields -->
     <div class="mb-4 flex flex-col sm:flex-row sm:gap-4 justify-center">
@@ -50,7 +50,6 @@
         <div class="text-center">Ticket ID</div>
         <div class="text-center">Event Name</div>
         <div class="text-center">Category</div>
-        <div class="text-center">QR Code</div>
         <div class="text-center">Action</div>
       </div>
       <!-- Ticket rows -->
@@ -63,9 +62,7 @@
         <div class="text-center">{{ ticket.ticket_id }}</div>
         <div class="text-center">{{ ticket.event_name }}</div>
         <div class="text-center">{{ ticket.category_name }}</div>
-        <div class="text-center">
-          <a :href="ticket.qr_code_url" target="_blank" class="text-blue-500">View QR</a>
-        </div>
+    
         <div class="text-center">
           <template v-if="ticket.valid_status == 1">
             <span class="text-green-500">Validated</span>
