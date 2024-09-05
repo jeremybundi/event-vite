@@ -1,30 +1,25 @@
 <template>
-    <div class="bg-gradient-to-r from-gray-600 via-gray-700 to-black p-4 flex justify-between items-center shadow-md rounded-lg mb-6">
-      <!-- Logo on the left -->
-      <img src="../assets/logo.jpg" alt="Logo" class="h-16 w-auto" />
-       <!-- Home Button -->
-       <button @click="goToHome" class="text-white px-4 py-2 border-transparent hover:border-b-2 hover:border-white transition-all duration-300">
+    <div class="bg-gradient-to-r from-gray-600 via-gray-700 to-black p-4 flex flex-col sm:flex-row justify-between items-center shadow-md rounded-lg mb-6">
+      <img src="../assets/logo.jpg" alt="Logo" class="h-12 sm:h-16 w-auto mb-2 sm:mb-0" />
+      
+       <button @click="goToHome" class="text-white px-4 py-2 border-transparent hover:border-b-2 hover:border-white transition-all duration-300 mb-2 sm:mb-0">
           Home
         </button>
   
-        <!-- Dashboard Button -->
-        <button @click="goToDashboard" class="text-white px-4 py-2 border-transparent hover:border-b-2 hover:border-white transition-all duration-300">
+        <button @click="goToDashboard" class="text-white px-4 py-2 border-transparent hover:border-b-2 hover:border-white transition-all duration-300 mb-2 sm:mb-0">
           Dashboard
         </button>
   
-      <!-- Navigation Buttons and Legacy Events centered text -->
-      <div class="flex items-center space-x-4 mx-auto">
+      <div class="flex flex-col sm:flex-row items-center sm:space-x-4 mx-auto mb-2 sm:mb-0">
        
   
-        <!-- Legacy Events centered text -->
-        <span class="text-white text-xl font-bold mx-4">
+        <span class="text-white text-xl font-bold">
           Legacy Events
         </span>
       </div>
   
-      <!-- Logged in as and Logout button on the right -->
-      <div class="flex items-center space-x-4">
-        <span class="text-white">Logged in as: <strong>{{ userStore.email }}</strong></span>
+      <div class="flex flex-col sm:flex-row items-center space-x-4">
+        <span class="text-white text-sm mb-2 sm:mb-0">Logged in as: <strong>{{ userStore.email }}</strong></span>
         <button
           @click="logout"
           class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 text-sm"
@@ -36,28 +31,28 @@
   </template>
   
   <script>
-  import { useAuthStore } from '../stores/userStore'; // Import the Pinia store
-  import { useRouter } from 'vue-router'; // Import the Vue Router
+  import { useAuthStore } from '../stores/userStore'; 
+  import { useRouter } from 'vue-router'; 
   
   export default {
     setup() {
-      const userStore = useAuthStore(); // Get access to the Pinia store
-      const router = useRouter(); // For navigation
+      const userStore = useAuthStore(); 
+      const router = useRouter(); 
   
       // Logout function
       const logout = () => {
-        userStore.logout(); // Clear token and user details from the store
-        router.push('/main'); // Redirect to the login page after logout
+        userStore.logout(); 
+        router.push('/main');
       };
   
       // Navigate to Home function
       const goToHome = () => {
-        router.push('/'); // Navigate to the home page
+        router.push('/'); 
       };
   
       // Navigate to Dashboard function
       const goToDashboard = () => {
-        router.push('/customerdashboard'); // Navigate to the customer dashboard
+        router.push('/customerdashboard'); 
       };
   
       return {
@@ -76,13 +71,19 @@
     max-height: 40px;
   }
   
+  @media (min-width: 640px) {
+    img {
+      max-height: 64px; 
+    }
+  }
+  
   /* Styling for navigation buttons */
   button {
     border: 2px solid transparent;
   }
   
   button:hover {
-    border-color: transparent; /* Keep border transparent to show underline */
+    border-color: transparent; 
   }
   
   button:hover::after {
