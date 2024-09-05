@@ -1,4 +1,6 @@
 <template>
+      <Header></Header>
+
   <div class="p-6 bg-gray-100 min-h-screen">
     <div class="flex items-center mb-8">
       <h1 class="text-3xl font-bold text-center flex-1 text-blue-600">Event Summary</h1>
@@ -43,8 +45,12 @@
 <script>
 import axios from 'axios';
 import { useAuthStore } from '../stores/auth';
+import Header from './Header.vue'
 
 export default {
+  components:{
+    Header,
+  },
   data() {
     return {
       eventsData: {}, // Object to hold events data

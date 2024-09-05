@@ -75,7 +75,8 @@ const verifyOtp = async () => {
     if (response.data.status === 'success') {
       // Store the token only in the Pinia store
       userStore.setToken(response.data.token);
-      console.log(response.data.token);
+      userStore.setEmail(response.data.email)
+      console.log(response.data.email);
 
       // Redirect to the customer dashboard
       router.push('/customerdashboard');

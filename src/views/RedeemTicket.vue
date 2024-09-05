@@ -1,6 +1,9 @@
 <template>
+        <Header></Header>
   <div class="flex items-center justify-center h-2/4 bg-gray-100 p-4">
+  
     <div class="w-full max-w-sm bg-white shadow-lg rounded-lg p-6">
+
       <h2 class="text-2xl font-bold mb-4 text-center text-gray-800">Redeem Your Ticket</h2>
       
       <form @submit.prevent="redeemTicket" class="space-y-4">
@@ -33,6 +36,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useAuthStore } from '../stores/auth'
+import Header from './Header.vue'
 
 const uniqueCode = ref('')
 const errorMessage = ref('')

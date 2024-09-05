@@ -1,5 +1,9 @@
 <template>
   <div class="container mx-auto p-4">
+    <!-- Include the reusable TopBar component -->
+    <TopBar />
+
+    <!-- Ticket List Heading -->
     <h1 class="text-2xl font-bold mb-4 text-center">Ticket List</h1>
 
     <!-- Search Fields -->
@@ -49,7 +53,6 @@
           {{ getPaymentStatus(ticket.payment_status) }}
         </div>
         <div class="text-center">{{ getRedeemedStatus(ticket.redeemed_ticket) }}</div>
-
       </div>
     </div>
     <div v-else-if="status === 'success' && filteredTickets.length === 0" class="text-gray-500 text-center">No tickets available.</div>
@@ -59,11 +62,17 @@
 <script>
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
-import { useAuthStore } from '../stores/userStore'; // Ensure this path is correct
+import { useAuthStore } from '../stores/userStore';
+import { useRouter } from 'vue-router';
+import TopBar from './TopBar.vue'; // Import the reusable component
 
 export default {
+  components: {
+    TopBar, // Register the TopBar component
+  },
   setup() {
-    const auth = useAuthStore(); // Use the Pinia store to access state and actions
+    const authStore = useAuthStore();
+    const router = useRouter();
     const tickets = ref([]);
     const searchById = ref('');
     const searchByEventName = ref('');
@@ -71,7 +80,7 @@ export default {
 
     onMounted(async () => {
       try {
-        const token = auth.token;
+        const token = authStore.token;
 
         if (!token) {
           throw new Error('Token is not available');
@@ -91,7 +100,6 @@ export default {
         }
 
         status.value = 'success';
-        console.log('Tickets fetched:', tickets.value);
       } catch (error) {
         console.error('Failed to fetch tickets:', error);
         status.value = 'error';
@@ -151,7 +159,12 @@ export default {
       getPaymentStatus,
       getPaymentStatusClass,
       getRedeemedStatus,
+      authStore,
     };
   },
 };
 </script>
+
+<style scoped>
+/* Add custom styles if needed */
+</style>

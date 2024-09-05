@@ -1,4 +1,6 @@
 <template>
+      <Header></Header>
+
   <div class="min-h-screen bg-gray-100 p-6">
     <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Upcoming Events</h1>
 
@@ -74,10 +76,12 @@
 <script>
 import EventEditForm from './EventEditForm.vue';
 import { useAuthStore } from '../stores/auth';
+import Header from './Header.vue'
 
 export default {
   components: {
     EventEditForm,
+    Header,
   },
   data() {
     return {

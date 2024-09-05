@@ -5,16 +5,16 @@ import { useLocalStorage } from '@vueuse/core';
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     token: useLocalStorage('token', ''),
-    user: useLocalStorage('user', '{}'), // Initialize as an empty JSON string
+    user: useLocalStorage('user', '{}'), 
   }),
   actions: {
     setToken(token, user) {
       this.token = token;
-      this.user = JSON.stringify(user); // Store user data as JSON string
+      this.user = JSON.stringify(user); 
       console.log('User set in store:', user);
       try {
         localStorage.setItem('token', token);
-        localStorage.setItem('user', this.user); // Save stringified user
+        localStorage.setItem('user', this.user); 
       } catch (error) {
         console.error('Error setting items in localStorage:', error);
       }
@@ -25,7 +25,7 @@ export const useAuthStore = defineStore('auth', {
     getUser() {
       try {
         const user = localStorage.getItem('user');
-        return user ? JSON.parse(user) : {}; // Parse user JSON data safely
+        return user ? JSON.parse(user) : {}; 
       } catch (error) {
         console.error('Error parsing user from localStorage:', error);
         return {};
@@ -33,7 +33,7 @@ export const useAuthStore = defineStore('auth', {
     },
     logout() {
       this.token = '';
-      this.user = '{}'; // Reset user to an empty JSON string
+      this.user = '{}'; 
       localStorage.removeItem('token');
       localStorage.removeItem('user');
     }

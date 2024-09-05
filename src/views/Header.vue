@@ -62,7 +62,8 @@ export default {
     const userName = computed(() => authStore.userName);
 
     const logout = () => {
-      authStore.logout();
+      authStore.logout(); 
+      router.push('/');  
     };
 
     const goToDashboard = () => {
@@ -79,9 +80,6 @@ export default {
         case 'Validator':
           router.push({ name: 'validatordashboard' });
           break;
-        /*case 'Customer':
-          router.push({ name: 'customerdashboard' });
-          break;*/
         default:
           router.push({ name: 'main' });
           break;

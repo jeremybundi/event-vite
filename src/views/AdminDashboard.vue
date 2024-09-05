@@ -1,5 +1,9 @@
 <template>
+  <div>
+
+   <Header></Header>
   <div class="min-h-screen bg-gray-100 p-6">
+
     <div class="max-w-7xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
       <!-- Header -->
       <div class="bg-blue-800 p-6">
@@ -90,12 +94,17 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
 import { useAuthStore } from '../stores/auth';
+import Header from './Header.vue'
 
 export default {
+  components: {
+    Header,
+  },
   setup() {
     const authStore = useAuthStore();
 
@@ -114,3 +123,5 @@ export default {
   @apply w-full text-white font-bold py-4 px-6 rounded-md shadow-lg transition-colors duration-300;
 }
 </style>
+
+

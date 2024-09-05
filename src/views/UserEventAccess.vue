@@ -1,4 +1,6 @@
 <template>
+        <Header></Header>
+
     <div class="p-8 max-w-md mx-auto bg-white rounded-xl shadow-lg space-y-6">
       <h1 class="text-3xl font-semibold text-gray-800">Manage User Event Access</h1>
   
@@ -47,6 +49,7 @@
   <script setup>
   import { ref } from 'vue';
   import axios from 'axios';
+  import Header from './Header.vue'
   
   const formData = ref({
     user_id: '',

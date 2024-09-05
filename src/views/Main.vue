@@ -1,6 +1,6 @@
 <template>
     <div class="space-y-6"> 
-        <!-- Top Right Corner Link -->
+      <Header></Header>
     <div class="absolute top-21 right-8">
       <router-link to="/customerlogin" class="text-red-600 hover:text-blue-800 flex items-center">
         <i class="fas fa-eye text-xl"></i>
@@ -19,7 +19,7 @@
   import { ref, onMounted } from 'vue';
   import axios from 'axios';
   import { useRouter } from 'vue-router';
-
+  import Header from './Header.vue'
   import EventCard from './EventCard.vue';
 
 

@@ -1,4 +1,7 @@
 <template>
+  <div>
+        <Header></Header>
+
     <div class="container mx-auto p-6 bg-white rounded-lg shadow-lg">
       <h2 class="text-3xl font-bold mb-4 text-center">Add New Event</h2>
       <form @submit.prevent="addEvent" class="space-y-6">
@@ -62,13 +65,18 @@
         <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Add Event</button>
       </form>
     </div>
+  </div>
   </template>
   
   <script>
 import axios from 'axios';
 import { useAuthStore } from '../stores/auth';
+import Header from './Header.vue'
 
 export default {
+  components: {
+    Header,
+  },
   data() {
     return {
       event: {

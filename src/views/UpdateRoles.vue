@@ -1,4 +1,6 @@
 <template>
+        <Header></Header>
+
     <div class="max-w-lg mx-auto mt-8 mb-8 bg-white shadow-lg rounded-lg overflow-hidden">
       <div class="bg-gradient-to-r  from-indigo-800 to-lime-800 p-4">
         <h2 class="text-3xl font-bold text-white">Update User Role</h2>
@@ -60,8 +62,12 @@
   <script>
   import axios from 'axios';
   import { useAuthStore } from '../stores/auth';
+  import Header from './Header.vue'
   
   export default {
+    components:{
+      Header,
+    },
     data() {
       return {
         userId: '',

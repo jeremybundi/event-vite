@@ -1,5 +1,7 @@
 <template>
+  <div>  <Header></Header>
     <div class="container mx-auto p-4">
+    
       <h1 class="text-2xl font-bold mb-4 text-center">Ticket List</h1>
   
       <!-- Search Fields -->
@@ -53,14 +55,19 @@
       </div>
       <div v-else-if="status === 'success' && filteredTickets.length === 0" class="text-gray-500 text-center">No tickets available.</div>
     </div>
+  </div>
   </template>
   
   <script>
   import { ref, onMounted, computed } from 'vue';
   import { useAuthStore } from '../stores/auth'; // Ensure this path is correct
   import axios from 'axios';
+  import Header from './Header.vue'
   
   export default {
+    components:{
+      Header,
+    },
     setup() {
       const auth = useAuthStore();
       const tickets = ref([]);

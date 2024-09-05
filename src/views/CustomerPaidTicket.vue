@@ -1,5 +1,8 @@
 <template>
   <div class="container mx-auto p-4">
+    <!-- Reusable TopBar Component -->
+    <TopBar />
+
     <h1 class="text-2xl font-bold mb-4 text-center">Paid Tickets</h1>
     
     <!-- Search Fields -->
@@ -19,7 +22,7 @@
         <div class="text-center">Event Name</div>
         <div class="text-center">Category</div>
         <div class="text-center">Validated</div>
-        <div class="text-center">Ticket Link</div>
+        <div class="text-center">Get ticket</div>
       </div>
 
       <!-- Ticket Rows -->
@@ -41,8 +44,8 @@
           <button 
             v-if="ticket.valid_status == 1" 
             @click="openModal(ticket)" 
-            class="text-blue-500 hover:underline">
-            View Ticket
+            class="text-blue-700 font-semibold text-sm hover:underline">
+            view ticket
           </button>
           <p v-else class="text-red-500">Ticket not validated.</p>
         </div>
@@ -61,19 +64,20 @@
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import { useAuthStore } from '../stores/userStore';
-import TicketModal from './TicketModal.vue'; // Import the TicketModal component
+import TicketModal from './TicketModal.vue'; 
+import TopBar from './TopBar.vue';  // Import the TopBar component
 
 export default {
   components: {
-    TicketModal, // Register the TicketModal component
+    TicketModal,
+    TopBar, // Register the TopBar component
   },
   setup() {
-    const userStore = useAuthStore();
+    const userStore = useAuthStore(); 
     const tickets = ref([]);
     const searchById = ref('');
     const searchByEventName = ref('');
     const status = ref('loading');
-    
     const isModalOpen = ref(false);
     const selectedTicket = ref(null);
 
@@ -86,9 +90,7 @@ export default {
         });
         tickets.value = response.data.tickets || [];
         status.value = 'success';
-        console.log(response.data.tickets);
       } catch (error) {
-        console.error('Failed to fetch tickets:', error);
         status.value = 'error';
       }
     });
@@ -135,7 +137,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Add any scoped styles here if needed */
-</style>

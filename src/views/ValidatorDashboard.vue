@@ -1,4 +1,6 @@
 <template>
+        <Header></Header>
+
     <div class="min-h-screen bg-gray-100 p-6">
       <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
         <!-- Header -->
@@ -40,8 +42,12 @@
   
   <script>
   import { useAuthStore } from '../stores/auth';
+  import Header from './Header.vue'
   
   export default {
+    components:{
+      Header,
+    },
     setup() {
       const authStore = useAuthStore();
   

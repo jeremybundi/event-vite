@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <Header></Header>
+ 
   <div class="p-6 max-w-4xl mx-auto bg-white shadow-xl rounded-lg">
     <h2 class="text-4xl font-bold mb-8 text-center text-gradient bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 text-transparent bg-clip-text">
       Event Analysis Report
@@ -74,6 +77,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -81,9 +85,10 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import BarChart from './BarChart.vue';
 import { useAuthStore } from '../stores/auth'; 
+import Header from './Header.vue'
 
 export default {
-  components: { BarChart },
+  components: { BarChart , Header},
   setup() {
     const authStore = useAuthStore();
     const events = ref({});
