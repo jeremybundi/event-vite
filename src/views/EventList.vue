@@ -1,8 +1,10 @@
 <template>
-      <Header></Header>
+  <Header></Header>
 
   <div class="min-h-screen bg-gray-100 p-6">
-    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Upcoming Events</h1>
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">
+      Upcoming Events
+    </h1>
 
     <!-- Search Field -->
     <div class="flex justify-end mb-6">
@@ -32,7 +34,9 @@
         class="grid grid-cols-6 gap-4 bg-white p-4 rounded-lg shadow items-center"
       >
         <!-- Numbering -->
-        <div class="text-lg font-semibold text-gray-800 text-left">{{ index + 1 }}.</div>
+        <div class="text-lg font-semibold text-gray-800 text-left">
+          {{ index + 1 }}.
+        </div>
 
         <!-- Event Name -->
         <div class="text-lg font-semibold text-gray-800 text-left">
@@ -76,7 +80,7 @@
 <script>
 import EventEditForm from './EventEditForm.vue';
 import { useAuthStore } from '../stores/auth';
-import Header from './Header.vue'
+import Header from './Header.vue';
 
 export default {
   components: {

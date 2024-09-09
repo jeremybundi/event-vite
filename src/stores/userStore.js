@@ -4,7 +4,7 @@ import { useLocalStorage } from '@vueuse/core';
 export const useAuthStore = defineStore('authStore', {
   state: () => ({
     token: useLocalStorage('auth-token', ''),
-    email: useLocalStorage('email', '')  // Initialize as an empty string
+    email: useLocalStorage('email', ''), // Initialize as an empty string
   }),
   actions: {
     setToken(token) {
@@ -15,9 +15,9 @@ export const useAuthStore = defineStore('authStore', {
     },
     logout() {
       this.token = '';
-      this.email = '';  // Clear the email on logout
+      this.email = ''; // Clear the email on logout
       localStorage.removeItem('auth-token');
-      localStorage.removeItem('email');  // Remove email from local storage
+      localStorage.removeItem('email'); // Remove email from local storage
     },
   },
   persist: {
@@ -26,8 +26,8 @@ export const useAuthStore = defineStore('authStore', {
       {
         key: 'auth-store',
         storage: localStorage,
-        paths: ['token', 'email'],  // Ensure both token and email are stored
-      }
-    ]
-  }
+        paths: ['token', 'email'], // Ensure both token and email are stored
+      },
+    ],
+  },
 });

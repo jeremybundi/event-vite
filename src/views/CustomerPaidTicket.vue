@@ -4,20 +4,36 @@
     <TopBar />
 
     <h1 class="text-2xl font-bold mb-4 text-center">Paid Tickets</h1>
-    
+
     <!-- Search Fields -->
     <div class="flex justify-center mb-4">
-      <input v-model="searchById" placeholder="Search by Ticket ID" class="border p-2 rounded mr-2">
-      <input v-model="searchByEventName" placeholder="Search by Event Name" class="border p-2 rounded">
+      <input
+        v-model="searchById"
+        placeholder="Search by Ticket ID"
+        class="border p-2 rounded mr-2"
+      />
+      <input
+        v-model="searchByEventName"
+        placeholder="Search by Event Name"
+        class="border p-2 rounded"
+      />
     </div>
 
     <!-- Status Messages -->
-    <div v-if="status === 'loading'" class="text-blue-500 text-center">Loading...</div>
-    <div v-if="status === 'error'" class="text-red-500 text-center">Failed to load tickets.</div>
-    <div v-if="status === 'success' && filteredTickets.length > 0" class="space-y-2">
-      
+    <div v-if="status === 'loading'" class="text-blue-500 text-center">
+      Loading...
+    </div>
+    <div v-if="status === 'error'" class="text-red-500 text-center">
+      Failed to load tickets.
+    </div>
+    <div
+      v-if="status === 'success' && filteredTickets.length > 0"
+      class="space-y-2"
+    >
       <!-- Header Row for Titles -->
-      <div class="grid grid-cols-1 sm:grid-cols-6 gap-2 bg-gray-200 p-2 font-semibold text-gray-700 rounded-md shadow-md">
+      <div
+        class="grid grid-cols-1 sm:grid-cols-6 gap-2 bg-gray-200 p-2 font-semibold text-gray-700 rounded-md shadow-md"
+      >
         <div class="text-center">Ticket ID</div>
         <div class="text-center">Event Name</div>
         <div class="text-center">Category</div>
@@ -41,10 +57,11 @@
         </div>
         <div class="text-center">
           <!-- Conditionally show the "View Ticket" button based on valid_status -->
-          <button 
-            v-if="ticket.valid_status == 1" 
-            @click="openModal(ticket)" 
-            class="text-blue-700 font-semibold text-sm hover:underline">
+          <button
+            v-if="ticket.valid_status == 1"
+            @click="openModal(ticket)"
+            class="text-blue-700 font-semibold text-sm hover:underline"
+          >
             view ticket
           </button>
           <p v-else class="text-red-500">Ticket not validated.</p>
@@ -53,10 +70,19 @@
     </div>
 
     <!-- No Tickets Available Message -->
-    <div v-else-if="status === 'success' && filteredTickets.length == 0" class="text-gray-500 text-center">No tickets available.</div>
+    <div
+      v-else-if="status === 'success' && filteredTickets.length == 0"
+      class="text-gray-500 text-center"
+    >
+      No tickets available.
+    </div>
 
     <!-- Conditionally Render Ticket Modal Component -->
-    <TicketModal v-if="isModalOpen" :ticket="selectedTicket" @close="closeModal" />
+    <TicketModal
+      v-if="isModalOpen"
+      :ticket="selectedTicket"
+      @close="closeModal"
+    />
   </div>
 </template>
 
@@ -64,8 +90,8 @@
 import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import { useAuthStore } from '../stores/userStore';
-import TicketModal from './TicketModal.vue'; 
-import TopBar from './TopBar.vue';  // Import the TopBar component
+import TicketModal from './TicketModal.vue';
+import TopBar from './TopBar.vue'; // Import the TopBar component
 
 export default {
   components: {
@@ -73,7 +99,7 @@ export default {
     TopBar, // Register the TopBar component
   },
   setup() {
-    const userStore = useAuthStore(); 
+    const userStore = useAuthStore();
     const tickets = ref([]);
     const searchById = ref('');
     const searchByEventName = ref('');
@@ -90,6 +116,7 @@ export default {
         });
         tickets.value = response.data.tickets || [];
         status.value = 'success';
+        console.log(response.data.tickets);
       } catch (error) {
         status.value = 'error';
       }
@@ -97,9 +124,16 @@ export default {
 
     const filteredTickets = computed(() => {
       if (!searchById.value && !searchByEventName.value) return tickets.value;
-      return tickets.value.filter(ticket =>
-        (searchById.value ? ticket.ticket_id.includes(searchById.value) : true) &&
-        (searchByEventName.value ? ticket.event_name.toLowerCase().includes(searchByEventName.value.toLowerCase()) : true)
+      return tickets.value.filter(
+        (ticket) =>
+          (searchById.value
+            ? ticket.ticket_id.includes(searchById.value)
+            : true) &&
+          (searchByEventName.value
+            ? ticket.event_name
+                .toLowerCase()
+                .includes(searchByEventName.value.toLowerCase())
+            : true)
       );
     });
 

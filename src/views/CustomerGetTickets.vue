@@ -24,16 +24,29 @@
 
     <!-- Filtered Event Count -->
     <div v-if="filteredTicketsByEventName.length > 0" class="mb-4 text-center">
-      <p class="font-semibold">Filtered Tickets for Event: {{ searchByEventName }}</p>
-      <p class="text-gray-600">Total Count: {{ filteredTicketsByEventName.length }}</p>
+      <p class="font-semibold">
+        Filtered Tickets for Event: {{ searchByEventName }}
+      </p>
+      <p class="text-gray-600">
+        Total Count: {{ filteredTicketsByEventName.length }}
+      </p>
     </div>
 
     <!-- Ticket List -->
-    <div v-if="status === 'loading'" class="text-blue-500 text-center">Loading...</div>
-    <div v-if="status === 'error'" class="text-red-500 text-center">Failed to load tickets.</div>
-    <div v-if="status === 'success' && filteredTickets.length > 0" class="space-y-2">
+    <div v-if="status === 'loading'" class="text-blue-500 text-center">
+      Loading...
+    </div>
+    <div v-if="status === 'error'" class="text-red-500 text-center">
+      Failed to load tickets.
+    </div>
+    <div
+      v-if="status === 'success' && filteredTickets.length > 0"
+      class="space-y-2"
+    >
       <!-- Header row for titles -->
-      <div class="grid grid-cols-5 gap-2 bg-gray-200 p-2 font-semibold text-gray-700 rounded-md shadow-md">
+      <div
+        class="grid grid-cols-5 gap-2 bg-gray-200 p-2 font-semibold text-gray-700 rounded-md shadow-md"
+      >
         <div class="text-center">Ticket ID</div>
         <div class="text-center">Event Name</div>
         <div class="text-center">Category</div>
@@ -49,13 +62,23 @@
         <div class="text-center">{{ ticket.ticket_id }}</div>
         <div class="text-center">{{ ticket.event_name }}</div>
         <div class="text-center">{{ ticket.category_name }}</div>
-        <div :class="getPaymentStatusClass(ticket.payment_status)" class="text-center">
+        <div
+          :class="getPaymentStatusClass(ticket.payment_status)"
+          class="text-center"
+        >
           {{ getPaymentStatus(ticket.payment_status) }}
         </div>
-        <div class="text-center">{{ getRedeemedStatus(ticket.redeemed_ticket) }}</div>
+        <div class="text-center">
+          {{ getRedeemedStatus(ticket.redeemed_ticket) }}
+        </div>
       </div>
     </div>
-    <div v-else-if="status === 'success' && filteredTickets.length === 0" class="text-gray-500 text-center">No tickets available.</div>
+    <div
+      v-else-if="status === 'success' && filteredTickets.length === 0"
+      class="text-gray-500 text-center"
+    >
+      No tickets available.
+    </div>
   </div>
 </template>
 
@@ -108,15 +131,26 @@ export default {
 
     const filteredTickets = computed(() => {
       if (!searchById.value && !searchByEventName.value) return tickets.value;
-      return tickets.value.filter(ticket =>
-        (searchById.value ? ticket.ticket_id.includes(searchById.value) : true) &&
-        (searchByEventName.value ? ticket.event_name.toLowerCase().includes(searchByEventName.value.toLowerCase()) : true)
+      return tickets.value.filter(
+        (ticket) =>
+          (searchById.value
+            ? ticket.ticket_id.includes(searchById.value)
+            : true) &&
+          (searchByEventName.value
+            ? ticket.event_name
+                .toLowerCase()
+                .includes(searchByEventName.value.toLowerCase())
+            : true)
       );
     });
 
     const filteredTicketsByEventName = computed(() => {
       if (!searchByEventName.value) return [];
-      return tickets.value.filter(ticket => ticket.event_name.toLowerCase().includes(searchByEventName.value.toLowerCase()));
+      return tickets.value.filter((ticket) =>
+        ticket.event_name
+          .toLowerCase()
+          .includes(searchByEventName.value.toLowerCase())
+      );
     });
 
     const getPaymentStatus = (status) => {

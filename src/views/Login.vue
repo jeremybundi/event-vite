@@ -8,37 +8,67 @@
         <form @submit.prevent="loginUser">
           <div class="mb-4">
             <label for="username" class="block text-gray-700">Username</label>
-            <input type="text" v-model="loginDetails.username" id="username" class="w-full mt-2 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+            <input
+              type="text"
+              v-model="loginDetails.username"
+              id="username"
+              class="w-full mt-2 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
           </div>
 
           <div class="mb-4">
             <label for="password" class="block text-gray-700">Password</label>
-            <input type="password" v-model="loginDetails.password" id="password" class="w-full mt-2 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+            <input
+              type="password"
+              v-model="loginDetails.password"
+              id="password"
+              class="w-full mt-2 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
           </div>
 
-          <button type="submit" class="w-full bg-lime-800 text-white py-3 px-4 rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-lg font-semibold mt-4">
+          <button
+            type="submit"
+            class="w-full bg-lime-800 text-white py-3 px-4 rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-lg font-semibold mt-4"
+          >
             Login
           </button>
         </form>
 
         <!-- Forgot Password Link -->
         <div class="mt-4 text-center">
-          <router-link to="/forgot" class="text-blue-500 hover:underline">Forgot Password?</router-link>
+          <router-link to="/forgot" class="text-blue-500 hover:underline"
+            >Forgot Password?</router-link
+          >
         </div>
       </div>
 
       <!-- OTP Verification -->
       <div v-else>
-        <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">Verify OTP</h2>
-        <p class="text-center text-gray-600 mb-6">Enter the OTP sent to your phone and email</p>
+        <h2 class="text-2xl font-bold text-gray-800 text-center mb-4">
+          Verify OTP
+        </h2>
+        <p class="text-center text-gray-600 mb-6">
+          Enter the OTP sent to your phone and email
+        </p>
 
         <form @submit.prevent="verifyOtp">
           <div class="mb-4">
             <label for="otp" class="block text-gray-700">OTP</label>
-            <input type="text" v-model="otp" id="otp" class="w-full mt-2 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+            <input
+              type="text"
+              v-model="otp"
+              id="otp"
+              class="w-full mt-2 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
           </div>
 
-          <button type="submit" class="w-full bg-green-600 text-white py-3 px-4 rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 text-lg font-semibold">
+          <button
+            type="submit"
+            class="w-full bg-green-600 text-white py-3 px-4 rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 text-lg font-semibold"
+          >
             Verify OTP
           </button>
         </form>
@@ -59,7 +89,7 @@ export default {
     const router = useRouter();
     const loginDetails = ref({
       username: '',
-      password: ''
+      password: '',
     });
     const otp = ref('');
     const otpSent = ref(false);
@@ -77,8 +107,11 @@ export default {
 
     const verifyOtp = async () => {
       try {
-        const response = await axios.post('/api/verify/otp', { username: loginDetails.value.username, otp: otp.value });
-        console.log('Login response:', response.data);
+        const response = await axios.post('/api/verify/otp', {
+          username: loginDetails.value.username,
+          otp: otp.value,
+        });
+        //console.log('Login response:', response.data);
 
         const userData = {
           token: response.data.token,
@@ -88,7 +121,7 @@ export default {
 
         authStore.setToken(userData.token, userData);
 
-        console.log('User data:', userData);
+        //console.log('User data:', userData);
 
         // Redirect based on user role
         switch (userData.role) {
@@ -116,6 +149,6 @@ export default {
     };
 
     return { loginDetails, otp, otpSent, loginUser, verifyOtp };
-  }
+  },
 };
 </script>

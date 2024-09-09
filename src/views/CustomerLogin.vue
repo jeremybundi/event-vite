@@ -4,7 +4,9 @@
       <h2 class="text-2xl font-semibold mb-4 text-center">Login</h2>
       <form v-if="!otpSent" @submit.prevent="sendOtp">
         <div class="mb-4">
-          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <label for="email" class="block text-sm font-medium text-gray-700"
+            >Email</label
+          >
           <input
             v-model="email"
             type="email"
@@ -23,7 +25,9 @@
 
       <form v-if="otpSent" @submit.prevent="verifyOtp" class="mt-6">
         <div class="mb-4">
-          <label for="otp" class="block text-sm font-medium text-gray-700">OTP</label>
+          <label for="otp" class="block text-sm font-medium text-gray-700"
+            >OTP</label
+          >
           <input
             v-model="otp"
             type="text"
@@ -58,7 +62,9 @@ const userStore = useAuthStore(); // Create an instance of the user store
 
 const sendOtp = async () => {
   try {
-    const response = await axios.post('/api/customer/login/sendotp', { email: email.value });
+    const response = await axios.post('/api/customer/login/sendotp', {
+      email: email.value,
+    });
     if (response.data.status === 'success') {
       otpSent.value = true;
     } else {
@@ -71,11 +77,14 @@ const sendOtp = async () => {
 
 const verifyOtp = async () => {
   try {
-    const response = await axios.post('/api/customer/login/verifyotp', { email: email.value, otp: otp.value });
+    const response = await axios.post('/api/customer/login/verifyotp', {
+      email: email.value,
+      otp: otp.value,
+    });
     if (response.data.status === 'success') {
       // Store the token only in the Pinia store
       userStore.setToken(response.data.token);
-      userStore.setEmail(response.data.email)
+      userStore.setEmail(response.data.email);
       console.log(response.data.email);
 
       // Redirect to the customer dashboard
