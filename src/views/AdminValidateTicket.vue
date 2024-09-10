@@ -118,7 +118,7 @@
 
 <script>
 import { ref, onMounted, computed } from 'vue';
-import { useAuthStore } from '../stores/auth'; // Ensure this path is correct
+import { useAuthStore } from '../stores/auth'; 
 import axios from 'axios';
 import Header from './Header.vue';
 
@@ -133,7 +133,6 @@ export default {
     const searchByEventName = ref('');
     const status = ref('loading');
 
-    // Fetch paid tickets data from the API when the component is mounted
     onMounted(async () => {
       try {
         const response = await axios.get('/api/tickets/paid', {
@@ -204,7 +203,7 @@ export default {
           },
         });
         tickets.value = response.data.tickets || [];
-        console.log('Ticket validated succesfully');
+        console.log('Ticket validated succesfully' );
       } catch (error) {
         console.error('Failed to validate ticket:', error);
       }

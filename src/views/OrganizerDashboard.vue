@@ -123,13 +123,27 @@
           View Summary
         </button>
 
-        <!-- User Event Access Button
-          <button @click="navigateTo('UserEvent')" class="dashboard-button bg-teal-500 hover:bg-teal-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m-8-8h16" />
+        <!-- User Event Access Button -->
+        <button
+            @click="navigateTo('UserEvent')"
+            class="dashboard-button bg-teal-500 hover:bg-teal-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 inline-block mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 4v16m-8-8h16"
+              />
             </svg>
-            User Event Access
-          </button -->
+            Add Access To Users
+          </button>
       </div>
 
       <!-- Footer -->

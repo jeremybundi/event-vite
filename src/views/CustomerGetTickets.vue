@@ -1,9 +1,7 @@
 <template>
   <div class="container mx-auto p-4">
-    <!-- Include the reusable TopBar component -->
     <TopBar />
 
-    <!-- Ticket List Heading -->
     <h1 class="text-2xl font-bold mb-4 text-center">Ticket List</h1>
 
     <!-- Search Fields -->

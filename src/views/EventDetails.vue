@@ -128,8 +128,7 @@
                     pattern="\d*"
                   />
                   <p class="text-gray-500 text-sm mt-2">
-                    Please enter the correct number you will pay with. Only
-                    numbers are allowed.
+                    Please enter the correct mpesa number you will pay with. 
                   </p>
                   <p v-if="phoneError" class="text-red-500 text-sm mt-2">
                     {{ phoneError }}

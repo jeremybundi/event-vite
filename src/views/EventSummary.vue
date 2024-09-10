@@ -120,7 +120,7 @@ export default {
         });
         // Store fetched data in eventsData
         this.eventsData = response.data.data;
-        console.log('Fetched data:', response.data.data);
+        //console.log('Fetched data:', response.data.data);
       } catch (error) {
         console.error('Error fetching event data:', error);
       }

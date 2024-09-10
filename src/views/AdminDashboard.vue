@@ -81,7 +81,7 @@
             Update Roles
           </button>
 
-          <!-- View Event Summary Button -->
+          <!-- Event Summary Button -->
           <button
             @click="navigateTo('summary')"
             class="dashboard-button bg-purple-500 hover:bg-purple-600"
@@ -100,7 +100,7 @@
                 d="M4 4h16v16H4z"
               />
             </svg>
-            View Events Summary
+            Events Summary
           </button>
 
           <!-- Admin Validate Button -->
@@ -144,7 +144,7 @@
                 d="M4 5h16M4 10h16m-7 4h7M4 15h7M4 20h7m-7-5h3"
               />
             </svg>
-            Booked & Purchased Tickets
+            Purchased Tickets
           </button>
 
           <!-- User Event Access Button -->
